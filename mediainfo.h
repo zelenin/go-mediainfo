@@ -1,3 +1,4 @@
+#include <locale.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>

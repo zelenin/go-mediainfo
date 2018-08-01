@@ -46,6 +46,7 @@ const (
 )
 
 func init() {
+    C.setlocale(C.LC_CTYPE, C.CString(""))
     C.MediaInfoDLL_Load()
 }
 

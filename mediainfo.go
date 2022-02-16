@@ -87,7 +87,7 @@ func Open(filePath string) (*File, error) {
     cFilePath := C.CString(filePath)
     defer C.free(unsafe.Pointer(cFilePath))
 
-    handle := C.OpenFile(C.CString(filePath))
+    handle := C.OpenFile(cFilePath)
     if handle == nil {
         return nil, errors.New("Cannot open file.")
     }

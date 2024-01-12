@@ -50,6 +50,11 @@ const char *Get(void *handle, MediaInfo_stream_C streamKind, size_t StreamNumber
     return toChar(MediaInfo_Get(handle, streamKind, StreamNumber, toWchar(Parameter), KindOfInfo, KindOfSearch));
 }
 
+const char *GetI(void *handle, MediaInfo_stream_C streamKind, size_t StreamNumber, unsigned long Parameter, MediaInfo_info_C KindOfInfo)
+{
+    return toChar(MediaInfo_GetI(handle, streamKind, StreamNumber, Parameter, KindOfInfo));
+}
+
 const char *Option(void *handle, char *Parameter, char *Value)
 {
     return toChar(MediaInfo_Option(handle, toWchar(Parameter), toWchar(Value)));

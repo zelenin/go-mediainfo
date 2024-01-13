@@ -46,7 +46,9 @@ const (
 )
 
 func init() {
-    C.setlocale(C.LC_CTYPE, C.CString(""))
+    str := C.CString("")
+    defer C.free(unsafe.Pointer(str))
+    C.setlocale(C.LC_CTYPE, str)
     C.MediaInfoDLL_Load()
 }
 

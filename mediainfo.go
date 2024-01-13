@@ -46,7 +46,9 @@ const (
 )
 
 func init() {
-    C.setlocale(C.LC_CTYPE, C.CString(""))
+    str := C.CString("")
+    defer C.free(unsafe.Pointer(str))
+    C.setlocale(C.LC_CTYPE, str)
     C.MediaInfoDLL_Load()
 }
 
@@ -67,6 +69,10 @@ func (file *File) Get(streamKind StreamKind, streamNumber int, parameter string,
     defer C.free(unsafe.Pointer(cParameter))
 
     return C.GoString(C.Get(file.handle, C.MediaInfo_stream_C(streamKind), C.size_t(streamNumber), cParameter, C.MediaInfo_info_C(infoKind), C.MediaInfo_info_C(0)))
+}
+
+func (file *File) GetI(streamKind StreamKind, streamNumber int, parameter int, infoKind InfoKind) string {
+    return C.GoString(C.GetI(file.handle, C.MediaInfo_stream_C(streamKind), C.size_t(streamNumber), C.size_t(parameter), C.MediaInfo_info_C(infoKind)))
 }
 
 func (file *File) Parameter(streamKind StreamKind, streamNumber int, parameter string) string {
